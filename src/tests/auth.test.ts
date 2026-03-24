@@ -7,17 +7,17 @@ describe("getAPIKey", () => {
     expect(getAPIKey(headers)).toBeNull();
   });
 
-  test("should return the token if authorization header starts with ApiKey", () => {
+  test("should return token if header starts with 'ApiKey '", () => {
     const headers = { authorization: "ApiKey my-secret-token" };
     expect(getAPIKey(headers)).toBe("my-secret-token");
   });
 
-  test("should return null if authorization header doesn't start with ApiKey", () => {
+  test("should return null if header doesn't start with 'ApiKey '", () => {
     const headers = { authorization: "Bearer something" };
     expect(getAPIKey(headers)).toBeNull();
   });
 
-  test("should return null if authorization header is malformed", () => {
+  test("should return null if header has only 'ApiKey' without token", () => {
     const headers = { authorization: "ApiKey" };
     expect(getAPIKey(headers)).toBeNull();
   });
